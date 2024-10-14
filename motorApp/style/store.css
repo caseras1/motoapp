@@ -1,0 +1,79 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Grid container for the product items */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+/* Individual product item styling */
+.product-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Product item hover effect */
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Image inside the product item */
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Product title */
+.product-item h3 {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Product description */
+.product-item p {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0;
+}
+
+/* Buy button styling */
+.buy-button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #ff4500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .product-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .product-container {
+        grid-template-columns: 1fr;
+    }
+}

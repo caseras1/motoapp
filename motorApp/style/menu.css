@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Full width and height for html and body */
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+/* Full width for the mainWrapper */
+.mainWrapper {
+    width: 100%;
+}
+
+/* Simple menu styles */
+#menuWrapper {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 20px;
+
+    /*Fixed the navbar */
+    position: fixed;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: left; /* Center align menu items */
+}
+
+nav ul li {
+    display: inline-block; /* Display menu items in a line */
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
