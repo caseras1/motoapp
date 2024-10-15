@@ -1,0 +1,227 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Gegenereerd op: 15 okt 2024 om 09:50
+-- Serverversie: 10.4.32-MariaDB
+-- PHP-versie: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `motorapp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `events`
+--
+
+CREATE TABLE `events` (
+  `event_id` int(11) NOT NULL,
+  `event_name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `max_participants` int(11) NOT NULL,
+  `creator_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `menu`
+--
+
+CREATE TABLE `menu` (
+  `paginaNr` int(3) NOT NULL,
+  `tekst` varchar(30) DEFAULT NULL,
+  `level` int(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `public_chat`
+--
+
+CREATE TABLE `public_chat` (
+  `message_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `sent_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `routes`
+--
+
+CREATE TABLE `routes` (
+  `route_id` int(11) NOT NULL,
+  `route_name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `start_location` varchar(255) NOT NULL,
+  `end_location` varchar(255) NOT NULL,
+  `distance_km` decimal(10,2) NOT NULL,
+  `difficulty` enum('Beginner','Advanced','Intermediate') NOT NULL,
+  `creator_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `store`
+--
+
+CREATE TABLE `store` (
+  `item_id` int(11) NOT NULL,
+  `item_name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `available` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `zipcode` varchar(255) DEFAULT NULL,
+  `city` varchar(100) NOT NULL,
+  `phoneNumber` varchar(20) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `level` int(11) DEFAULT NULL,
+  `Salt` char(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `users`
+--
+
+INSERT INTO `users` (`user_id`, `firstName`, `lastName`, `address`, `zipcode`, `city`, `phoneNumber`, `email`, `username`, `password`, `level`, `Salt`) VALUES
+(11, 'Cas', 'Eras', 'Frieslandlaan 1', '5691KV', 'Son en Breugel', '0629384685', 'erascas7@gmail.com', 'bbbbbb', '26de3ab59daaaa37e7ec33d580a8ce2dbe38dc8d97c90fce9adb5e9389daf2aa26da2d99ab495837eb7568226624765c7adf4c5cb05fbdea3cbe2a3e28e66cc3', 1, '8a5d0bcc04987a78b59e309106c053879b1ceb6984bec1d651cef119a10f16e19ab07b90cd2f0302e75d93d7d301725debe12b57017b04b582fea6233bec2011');
+
+--
+-- Indexen voor geëxporteerde tabellen
+--
+
+--
+-- Indexen voor tabel `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`event_id`),
+  ADD KEY `creator_id` (`creator_id`);
+
+--
+-- Indexen voor tabel `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`paginaNr`);
+
+--
+-- Indexen voor tabel `public_chat`
+--
+ALTER TABLE `public_chat`
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `sender_id` (`sender_id`);
+
+--
+-- Indexen voor tabel `routes`
+--
+ALTER TABLE `routes`
+  ADD PRIMARY KEY (`route_id`),
+  ADD KEY `creator_id` (`creator_id`);
+
+--
+-- Indexen voor tabel `store`
+--
+ALTER TABLE `store`
+  ADD PRIMARY KEY (`item_id`);
+
+--
+-- Indexen voor tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT voor geëxporteerde tabellen
+--
+
+--
+-- AUTO_INCREMENT voor een tabel `events`
+--
+ALTER TABLE `events`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `public_chat`
+--
+ALTER TABLE `public_chat`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `routes`
+--
+ALTER TABLE `routes`
+  MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `store`
+--
+ALTER TABLE `store`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Beperkingen voor geëxporteerde tabellen
+--
+
+--
+-- Beperkingen voor tabel `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`creator_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Beperkingen voor tabel `public_chat`
+--
+ALTER TABLE `public_chat`
+  ADD CONSTRAINT `public_chat_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Beperkingen voor tabel `routes`
+--
+ALTER TABLE `routes`
+  ADD CONSTRAINT `routes_ibfk_1` FOREIGN KEY (`creator_id`) REFERENCES `users` (`user_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_C
